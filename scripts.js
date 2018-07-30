@@ -27,3 +27,21 @@ function paintToCanvas() {
     ctx.drawImage(video, 0, 0, width, height);
   }, 16);
 }
+
+function takePhoto() {
+  // Plays snap sounds
+  snap.currentTime = 0;
+  snap.play();
+
+  // Retrieve data from canvas
+  const data = canvas.toDataURL('image/jpeg');
+  const link = document.createElement('a');
+  link.href = data;
+  link.setAttribute('download', 'handsome');
+  link.innerHTML = `<img src="${data}" alt="Handsome Man" />`;
+  strip.insertBefore(link, strip.firstChild);
+  console.log(data);
+}
+
+getVideo();
+video.addEventListener('canplay', paintToCanvas);
